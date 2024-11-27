@@ -3,7 +3,7 @@ import { TeamService } from './team.service';
 import { CreateTeamDto } from './dto/create-team.dto';
 import { UpdateTeamDto } from './dto/update-team.dto';
 
-@Controller('team')
+@Controller('teams')
 export class TeamController {
   constructor(private readonly teamService: TeamService) {}
 
@@ -17,18 +17,28 @@ export class TeamController {
     return this.teamService.findAll();
   }
 
+  @Get('players')
+  async getAllTeamWithPlayers() {
+    return this.teamService.getAllTeamWithPlayers();
+  }
+
+  @Post(':teamid/addPlayer/:playerid')
+  addPlayer(@Param('teamid') teamid: string, @Param('playerid') playerid: string){
+    return this.teamService.addPlayer(+teamid, +playerid);
+  }
+
   @Get(':id')
-  findOne(@Param('id') id: string) {
+  async findOne(@Param('id') id: string) {
     return this.teamService.findOne(+id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateTeamDto: UpdateTeamDto) {
+  async update(@Param('id') id: string, @Body() updateTeamDto: UpdateTeamDto) {
     return this.teamService.update(+id, updateTeamDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
+  async remove(@Param('id') id: string) {
     return this.teamService.remove(+id);
   }
 }

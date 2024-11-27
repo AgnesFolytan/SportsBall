@@ -1,6 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { TeamController } from './team.controller';
 import { TeamService } from './team.service';
+import { PrismaService } from 'src/prisma.service';
 
 describe('TeamController', () => {
   let controller: TeamController;

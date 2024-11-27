@@ -3,7 +3,7 @@ import { PlayerService } from './player.service';
 import { CreatePlayerDto } from './dto/create-player.dto';
 import { UpdatePlayerDto } from './dto/update-player.dto';
 
-@Controller('player')
+@Controller('players')
 export class PlayerController {
   constructor(private readonly playerService: PlayerService) {}
 
@@ -13,7 +13,7 @@ export class PlayerController {
   }
 
   @Get()
-  findAll() {
+  async findAll() {
     return this.playerService.findAll();
   }
 
@@ -23,12 +23,12 @@ export class PlayerController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updatePlayerDto: UpdatePlayerDto) {
+  async update(@Param('id') id: string, @Body() updatePlayerDto: UpdatePlayerDto) {
     return this.playerService.update(+id, updatePlayerDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
+  async remove(@Param('id') id: string) {
     return this.playerService.remove(+id);
   }
 }
