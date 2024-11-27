@@ -27,6 +27,11 @@ export class TeamController {
     return this.teamService.addPlayer(+teamid, +playerid);
   }
 
+  @Delete(':teamid/removePlayer/:playerid')
+  removePlayer(@Param('teamid') teamid: string, @Param('playerid') playerid: string){
+    return this.teamService.removePlayer(+teamid, +playerid);
+  }
+
   @Get(':id')
   async findOne(@Param('id') id: string) {
     return this.teamService.findOne(+id);

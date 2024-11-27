@@ -35,6 +35,13 @@ export class TeamService {
     })
   }
 
+  removePlayer(teamid: number, playerid: number){
+    return this.db.team.update({
+      where: {id: teamid},
+      data: {players: {disconnect: {id: playerid}}}
+    })
+  }
+
   findOne(id: number) {
     return this.db.team.findUnique({
       where: {
